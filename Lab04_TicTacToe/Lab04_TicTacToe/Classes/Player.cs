@@ -68,16 +68,21 @@ namespace Lab04_TicTacToe.Classes
 
 			Console.WriteLine($"{Name} it is your turn");
 
-			Position position = GetPosition(board);
-
-			if (Int32.TryParse(board.GameBoard[position.Row, position.Column], out int _))
+			bool spaceTaken;
+			do
 			{
-				board.GameBoard[position.Row, position.Column] = Marker;
-			}
-			else
-			{
-				Console.WriteLine("This space is already occupied");
-			}
+				Position position = GetPosition(board);
+				if (Int32.TryParse(board.GameBoard[position.Row, position.Column], out int _))
+				{
+					board.GameBoard[position.Row, position.Column] = Marker;
+					spaceTaken = false;
+				}
+				else
+				{
+					Console.WriteLine("This space is already occupied");
+					spaceTaken = true;
+				}
+			} while (spaceTaken);
 		}
 	}
 }
